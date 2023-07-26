@@ -1,0 +1,121 @@
+algotutor assignment:
+
+
+
+1.Find the number of duplicate numbers
+
+
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        array={}
+        for i,a in enumerate(nums):
+            if a not in array:
+                array[a] =1
+            else:
+                array[a] +=1
+                for key,value in array.items():
+                    if value>1:
+                        return key
+
+
+
+
+2.Number of good pairs
+
+
+
+
+class Solution:
+    def numIdenticalPairs(self, nums: List[int]) -> int:
+        count=0
+        for a,i in enumerate(nums):
+            for j in nums[a+1:]:
+                if i==j:
+                    count+=1
+        return count
+
+
+
+3.Find greatest common divisor of array
+
+
+
+
+class Solution:
+    def findGCD(self, nums: List[int]) -> int:
+        min=nums[0]
+        max=nums[0]
+        for i in nums:
+            if i < min:
+                min=i
+            if i > max:
+                max=i
+        while max and min:
+            if max>min:
+                max%=min
+            else:
+                min%=max
+        return max if max>min else min
+
+
+
+4.Find all duplicates in array
+
+
+
+
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        array={}
+        for i in nums:
+            if i in array:
+                array[i]+=1
+            else:
+                array[i]=1
+        keys=[key for key,values in array.items()  if values==2]
+        return keys
+          
+
+
+
+5.maximum points you can obtain from cards
+
+
+
+
+class Solution:
+    def maxScore(self, cp: List[int], n: int) -> int:
+        if n >= len(cp):
+            return sum(cp)
+
+        left,right,minimum,total = 0,0, sum(cp), 0
+
+        while right < len(cp):
+            while right - left + 1 <= len(cp) - n:
+                total += cp[right]
+                if right - left + 1 == len(cp) - n:
+                    minimum = min(total,minimum)
+                right += 1
+
+            while right - left + 1 > len(cp) - n:
+                total -= cp[left]
+                left += 1
+
+        return sum(cp) - minimum
+        
+
+
+6.Maximum gap
+
+
+
+class Solution:
+    def maximumGap(self, nums: List[int]) -> int:
+        nums.sort()
+        a=len(nums)
+        b=0
+        for i in range(a-1):
+            b=max(b,abs(nums[i]-nums[i+1]))
+        return b
+      
+
